@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
-    private float playerSpeed = 2.0f;
+    private float playerSpeed = 1000.0f;
     // [SerializeField]
     // private float jumpHeight = 1.0f;
     // [SerializeField]
@@ -36,7 +36,7 @@ public class PlayerControls : MonoBehaviour
         }
 
         Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(move * Time.deltaTime * playerSpeed * 50);
 
         // if (move != Vector3.zero)
         // {
