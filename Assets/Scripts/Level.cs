@@ -6,7 +6,7 @@ public class Level : MonoBehaviour
 {
 	#region Serializables
 
-	[Header("Tooltips")]
+	[Header("Level Configuration")]
 
 	[SerializeField]
 	private Animator animator;
