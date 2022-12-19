@@ -13,6 +13,21 @@ public class Student : MonoBehaviour
 	[SerializeField]
 	private AudioSource audioSource;
 
+	[SerializeField]
+	private string sleepingBoolName = "isSleeping";
+
+	private bool isSleeping = false;
+
+	public bool IsSleeping {
+		get {
+			return isSleeping;
+		}
+		set {
+			isSleeping = value;
+			animator.SetBool(sleepingBoolName, value);
+		}
+	}
+
 	#endregion
 
 	#region Monobehaviour
@@ -25,14 +40,27 @@ public class Student : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		
+		Respond();
 	}
+
+	void Respond()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            IsSleeping = false;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            IsSleeping = true;
+        }
+    }
+
+
 
 	#endregion
 
 	#region Student Functions
-
-
 
 	#endregion
 }
