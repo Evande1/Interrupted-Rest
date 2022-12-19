@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,8 @@ public class Level : MonoBehaviour
 	private List<Student> studentList = new List<Student>();
 	[SerializeField, Tooltip("Number of students.")]
 	private int numStudents = 5;
+	[SerializeField, Tooltip("Student prefab.")]
+	private Student studentPrefab;
 	[SerializeField]
 	private List<GameObject> studentSpawnLocations = new List<GameObject>();
 	[SerializeField]
@@ -104,10 +107,64 @@ public class Level : MonoBehaviour
 	/// </summary>
 	void StartGame()
 	{
+		// Set level variables
 		timeLeft = startTimeLimit;
 		levelNameTMP.text = levelName;
 		lessonProgress = 0;
+
+		// Annihilate all previous students if any
+		foreach(Student student in studentList)
+			Destroy(student.gameObject);
+		studentList.Clear();
+		sleepingStudentList.Clear();
+		
+
+		// Instantiate students
+		
+		// Randomize spawn location order
+		List<int> spawnOrder = Enumerable.Range(0, studentSpawnLocations.Count).ToList();
+		spawnOrder.Shuffle();
+		for (int i = 0; i < numStudents; i++)
+		{
+			Student student = Instantiate(
+				studentPrefab,
+				studentSpawnLocations[spawnOrder[i]].transform.position,
+				Quaternion.identity,
+				transform);
+			// Attach listener to the student object
+			student.OnSleepChangeEvent.AddListener(OnStudentStateChange);
+			student.OnHitEvent.AddListener(OnStudentHit);
+			studentList.Add(student);
+		}
+
+		// Update state
 		isPlaying = true;
+	}
+
+	void OnStudentStateChange(Student student)
+	{
+		if (student.IsSleeping)
+		{
+			sleepingStudentList.Add(student);
+		}
+		else
+		{
+			sleepingStudentList.Remove(student);
+		}
+	}
+
+	void OnStudentHit(Student student)
+	{
+		if (student.IsSleeping)
+		{
+			// Add Points
+			lessonProgress += bonkScore;
+		}
+		else
+		{
+			// Penalty
+			lessonProgress -= bonkPenalty;
+		}
 	}
 
 	#endregion
