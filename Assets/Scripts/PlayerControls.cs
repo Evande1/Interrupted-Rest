@@ -14,10 +14,15 @@ public class PlayerControls : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-
+     
     private Vector2 movementInput = Vector2.zero;
-    
 
+    [SerializeField]
+    private bool isBonking = false;    
+
+    [SerializeField]
+    private Animator animator;
+   
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -27,8 +32,25 @@ public class PlayerControls : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
     }
     
+    public bool isAttacking() {
+        return isBonking;
+    }
+
+    public void toggleAttacking() {
+        isBonking = !isAttacking();
+    }
+
+    public void attack(){
+        toggleAttacking();
+        animator.SetBool("isAttacking", isBonking);
+        // toggleAttacking();
+        // animator.SetBool("isAttacking", isBonking);
+        
+    }
+
     public void onAttack(InputAction.CallbackContext context) {
-        Debug.Log("Attacking");
+        Debug.Log("Hello");
+        attack();
     }
 
     void Update()
