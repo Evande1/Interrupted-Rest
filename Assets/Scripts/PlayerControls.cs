@@ -26,6 +26,10 @@ public class PlayerControls : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context){
         movementInput = context.ReadValue<Vector2>();
     }
+    
+    public void onAttack(InputAction.CallbackContext context) {
+        Debug.Log("Attacking");
+    }
 
     void Update()
     {
