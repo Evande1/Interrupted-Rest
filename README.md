@@ -8,6 +8,7 @@
 *Getting Started
 <br>
 *Player Rules and Objectives
+<br>
 *Acknowledgements
 </details>
 
