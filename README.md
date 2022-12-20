@@ -26,13 +26,13 @@ Player 1 Controls &emsp; Player 2 Controls
 <br>
 W Key: Up &emsp; Up Arrow: Up
 <br>
-S Key: Down &emsp; Down Arrow: Down
+S Key: Down &emsp;&emsp; Down Arrow: Down
 <br>
-A Key: Left &emsp; Left Arrow: Left &emsp;
+A Key: Left &emsp;&emsp; Left Arrow: Left &emsp;
 <br>
-D Key: Right &emsp; Right Arrow: Right
+D Key: Right &emsp;&emsp;Right Arrow: Right
 <br>
-C Key: Hit &emsp; Slash Key: Hit
+C Key: Hit &emsp;&emsp;  Slash Key: Hit
 
 ## Acknowledgements
 Music: [Pixabay.com](https://pixabay.com/)
