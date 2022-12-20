@@ -48,18 +48,7 @@ public class Student : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.UpArrow))
-		{
-			IsSleeping = false;
-		}
-		else if (Input.GetKey(KeyCode.DownArrow))
-		{
-			IsSleeping = true;
-		}
-		else if (Input.GetKey(KeyCode.RightArrow))
-		{
-			GetBonked();
-		}
+
 	}
 	
 	#endregion
