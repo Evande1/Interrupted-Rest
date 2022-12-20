@@ -123,12 +123,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7828134459083352863}
   audioSource: {fileID: 6873158020183049970}
+  bonkSound: {fileID: 8300000, guid: 6f1248a0cc6e3404daf75bb085d8bb7b, type: 3}
   sleepingBoolName: isSleeping
   isSleeping: 0
+  sleepChancePerSecond: 0.01
   OnHitEvent:
     m_PersistentCalls:
       m_Calls: []
   OnSleepChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWantToSleepEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &6873158020183049970

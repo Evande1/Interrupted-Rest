@@ -10,6 +10,10 @@ public class Student : MonoBehaviour
 	private Animator animator;
 	[SerializeField]
 	private AudioSource audioSource;
+	
+	[SerializeField]
+	private AudioClip bonkSound;
+
 
 	[SerializeField]
 	private string sleepingBoolName = "isSleeping";
@@ -80,6 +84,7 @@ public class Student : MonoBehaviour
 	{
 		OnHitEvent.Invoke(this);
 		IsSleeping = false;
+		audioSource.PlayOneShot(bonkSound);
 		Debug.Log($"[{name}] got bonked!");
 	}
 
