@@ -95,7 +95,6 @@ public class Level : MonoBehaviour
 
 	private void Awake()
 	{
-		StartGame();
 	}
 
 	void Update()
@@ -105,9 +104,9 @@ public class Level : MonoBehaviour
 		if (timeLeft <= 0)
 		{
 			isPlaying = false;
-			timeLeft = 0.0f;
+			timeLeft = 0.00001f;
 			ScreenEndPanel.SetActive(true);
-			ScreenEndScoreTMP.text = lessonProgress.ToString();
+			ScreenEndScoreTMP.text = (Mathf.Round(lessonProgress*100.0f)/100.0f).ToString() + "%";
 		}
 
 		Debug.Log(currentLearningRate);
@@ -133,7 +132,7 @@ public class Level : MonoBehaviour
 	/// <summary>
 	/// Initialised the game and starts it.
 	/// </summary>
-	void StartGame()
+	public void StartGame()
 	{
 		// Set level variables
 		timeLeft = startTimeLimit;
@@ -202,6 +201,11 @@ public class Level : MonoBehaviour
 	{
 		if (numSleepingStudents < maxSleepingStudents)
 			student.IsSleeping = true;
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
 	}
 
 	#endregion
