@@ -5,9 +5,15 @@ Interrupted sleep is a 2D local cooperative game where players revitalise studen
 
 
 <details>
-<summary>## Table of Contents</summary>
+<summary>Table of Contents</summary>
 <br>
-
+Project Description
+<br>
+How to install and run the project
+<br>
+How to use the project
+<br>
+Acknowledgements
 </details>
 
 ## How to install and run the project
