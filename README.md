@@ -5,9 +5,9 @@
 <br>
 *Project Description
 <br>
-*How to install and run the project
+*Getting Started
 <br>
-*How to use the project
+*Player Rules and Objectives
 <br>
 *Acknowledgements
 </details>
@@ -15,8 +15,11 @@
 ## Project Description
 Interrupted sleep is a 2D local cooperative game where players revitalise students and impart the spirit of lifelong learning by staying awake in lectures.
 
-## How to install and run the project
+## Getting Started
+### Prerequisites
 
-## How to use the project
+### Installation
+
+## Player Rules and Objectives
 
 ## Acknowledgements
