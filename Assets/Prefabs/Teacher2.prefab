@@ -63,5 +63,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Teacher2
       objectReference: {fileID: 0}
+    - target: {fileID: 6119295795331636223, guid: 4734a097b24994948aab4bfc6dc6551a, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: bba2a7acec616a84f89abed1a8b70113, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4734a097b24994948aab4bfc6dc6551a, type: 3}

@@ -24,7 +24,7 @@ public class Student : MonoBehaviour
 	[SerializeField, Tooltip("On student getting hit event.")]
 	public UnityStudentEvent OnHitEvent = new UnityStudentEvent();
 
-	[SerializeField, Tooltip("On student changing its sleep status event. Keep in mind this will invoke right before the OnHitEvent.")]
+	[SerializeField, Tooltip("On student changing its sleep status event. Keep in mind this will invoke right after the OnHitEvent.")]
 	public UnityStudentEvent OnSleepChangeEvent = new UnityStudentEvent();
 
 	[SerializeField, Tooltip("On student wanting to sleep event (the student seeks approval from the level manager to sleep).")]
@@ -78,8 +78,8 @@ public class Student : MonoBehaviour
 	/// </summary>
 	public void GetBonked()
 	{
-		IsSleeping = false;
 		OnHitEvent.Invoke(this);
+		IsSleeping = false;
 		Debug.Log($"[{name}] got bonked!");
 	}
 

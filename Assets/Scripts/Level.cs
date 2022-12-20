@@ -64,6 +64,10 @@ public class Level : MonoBehaviour
 	private float progressBarMaxValue = 20;
 	[SerializeField]
 	private Slider progressBarSlider;
+	[SerializeField]
+	private GameObject ScreenEndPanel;
+	[SerializeField]
+	private TextMeshProUGUI ScreenEndScoreTMP;
 
 	#endregion
 
@@ -72,7 +76,7 @@ public class Level : MonoBehaviour
 	/// <summary>
 	/// The current learning rate per second, scales linearly by the number of students awake.
 	/// </summary>
-	private float currentLearningRate => (studentList.Count - sleepingStudentList.Count) / studentList.Count * maxPassiveScore / startTimeLimit;
+	private float currentLearningRate => (((float)numStudents - (float)numSleepingStudents) / (float)numStudents) * maxPassiveScore / startTimeLimit;
 
 	public int numSleepingStudents => sleepingStudentList.Count;
 
@@ -81,12 +85,7 @@ public class Level : MonoBehaviour
 		get => lessonProgress;
 		set
 		{
-			if (value < 0)
-			{
-				lessonProgress = 0;
-				return;
-			}
-			lessonProgress = value;
+			lessonProgress = value < 0 ? 0 : value;
 		}
 	}
 
@@ -102,6 +101,16 @@ public class Level : MonoBehaviour
 	void Update()
 	{
 		if (!isPlaying) return;
+
+		if (timeLeft <= 0)
+		{
+			isPlaying = false;
+			timeLeft = 0.0f;
+			ScreenEndPanel.SetActive(true);
+			ScreenEndScoreTMP.text = lessonProgress.ToString();
+		}
+
+		Debug.Log(currentLearningRate);
 
 		// Update timer
 		timeLeft -= Time.deltaTime;
