@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput))]
 public class PlayerControls : MonoBehaviour
 {
 	#region Serializables
@@ -22,7 +22,7 @@ public class PlayerControls : MonoBehaviour
 
     #region Member Declarations
 
-    private CharacterController controller;
+    private Rigidbody2D rigidbody;
     private Vector2 movementInput { get; set; } = Vector2.zero;
 
 	#endregion
@@ -31,15 +31,22 @@ public class PlayerControls : MonoBehaviour
 
 	private void Awake()
 	{
-        controller = gameObject.GetComponent<CharacterController>();
+        rigidbody = gameObject.GetComponent<Rigidbody2D>();
 	}
 
 	void Update()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(animAttackState))
+		{
+            rigidbody.velocity = Vector2.zero;
             return;
-        Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        }
+
+        float xScale = transform.localScale.x;
+        if (movementInput.x != 0)
+            xScale = movementInput.x < 0 ? 1 : -1;
+        transform.localScale = new Vector3(xScale, 1, 1);
+        rigidbody.velocity = movementInput * playerSpeed;
     }
 
 	#endregion
@@ -49,11 +56,11 @@ public class PlayerControls : MonoBehaviour
 	public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        Debug.Log(movementInput);
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
         animator.SetTrigger(animAttackTrigger);
     }
 

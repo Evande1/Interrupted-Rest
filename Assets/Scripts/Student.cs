@@ -16,6 +16,9 @@ public class Student : MonoBehaviour
 	[SerializeField]
 	private bool isSleeping = false;
 
+	[SerializeField]
+	public float sleepChancePerSecond = 0.01f;
+
 	[Header("Events")]
 
 	[SerializeField, Tooltip("On student getting hit event.")]
@@ -23,6 +26,9 @@ public class Student : MonoBehaviour
 
 	[SerializeField, Tooltip("On student changing its sleep status event. Keep in mind this will invoke right before the OnHitEvent.")]
 	public UnityStudentEvent OnSleepChangeEvent = new UnityStudentEvent();
+
+	[SerializeField, Tooltip("On student wanting to sleep event (the student seeks approval from the level manager to sleep).")]
+	public UnityStudentEvent OnWantToSleepEvent = new UnityStudentEvent();
 
 	#endregion
 
@@ -42,13 +48,25 @@ public class Student : MonoBehaviour
 		}
 	}
 
+	private float sleepCheckCooldown = 0.0f;
+
 	#endregion
 
 	#region Monobehaviour
 
 	void Update()
 	{
+		if (IsSleeping) return;
+		if (sleepCheckCooldown <= 0)
+		{
+			sleepCheckCooldown = 1;
+			bool wantToSleep = Random.Range(0.0f, 1.0f) <= sleepChancePerSecond ? true : false;
+			if (wantToSleep)
+				OnWantToSleepEvent.Invoke(this);
 
+			return;
+		}
+		sleepCheckCooldown -= Time.deltaTime;
 	}
 	
 	#endregion
@@ -62,6 +80,20 @@ public class Student : MonoBehaviour
 	{
 		IsSleeping = false;
 		OnHitEvent.Invoke(this);
+		Debug.Log($"[{name}] got bonked!");
+	}
+
+	#endregion
+
+	#region Collision Events
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		Debug.Log("Collided");
+		if (collision.attachedRigidbody.TryGetComponent<PlayerControls>(out _))
+		{
+			GetBonked();
+		}
 	}
 
 	#endregion

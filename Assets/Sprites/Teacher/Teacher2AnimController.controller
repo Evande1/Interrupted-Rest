@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 69e29c27b3aacbf4e9f0aca462ba185b, type: 2}
+  m_Motion: {fileID: 7400000, guid: d3e10dc3288886d48bb0cf0745c2a1d9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -73,7 +73,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6dfa4894c344740438b4a7485ce9dc3b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 718fa94ac9a1fee47a08d5a088f21ef9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -85,7 +85,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TeacherAnimController
+  m_Name: Teacher2AnimController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isAttacking
@@ -123,7 +123,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.999
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

@@ -20,6 +20,8 @@ public class Level : MonoBehaviour
 	private float bonkScore = 3;
 	[SerializeField, Tooltip("Learning progress penalty on bonking an awake student.")]
 	private float bonkPenalty = 5;
+	[SerializeField, Tooltip("Maximum number of sleeping students.")]
+	private int maxSleepingStudents = 5;
 
 	[Header("Student Configuration")]
 
@@ -27,8 +29,10 @@ public class Level : MonoBehaviour
 	private List<Student> studentList = new List<Student>();
 	[SerializeField, Tooltip("Number of students.")]
 	private int numStudents = 5;
-	[SerializeField, Tooltip("Student prefab.")]
-	private Student studentPrefab;
+	[SerializeField, Tooltip("Per student sleeping rate per second.")]
+	private float studentSleepChancePerSecond = 0.1f;
+	[SerializeField, Tooltip("Student prefabs.")]
+	private List<Student> studentPrefabs = new List<Student>();
 	[SerializeField]
 	private List<GameObject> studentSpawnLocations = new List<GameObject>();
 	[SerializeField]
@@ -68,8 +72,23 @@ public class Level : MonoBehaviour
 	/// <summary>
 	/// The current learning rate per second, scales linearly by the number of students awake.
 	/// </summary>
-	//private float currentLearningRate => (studentList.Count - sleepingStudentList.Count) / studentList.Count * maxPassiveScore / startTimeLimit;
-	private float currentLearningRate => maxPassiveScore/startTimeLimit;
+	private float currentLearningRate => (studentList.Count - sleepingStudentList.Count) / studentList.Count * maxPassiveScore / startTimeLimit;
+
+	public int numSleepingStudents => sleepingStudentList.Count;
+
+	public float LessonProgress
+	{
+		get => lessonProgress;
+		set
+		{
+			if (value < 0)
+			{
+				lessonProgress = 0;
+				return;
+			}
+			lessonProgress = value;
+		}
+	}
 
 	#endregion
 
@@ -91,11 +110,11 @@ public class Level : MonoBehaviour
 		timeLeftTMP.text = $"{Mathf.FloorToInt(timeLeft / 60.0f)}:{Mathf.FloorToInt(timeLeft % 60.0f).ToString().PadLeft(2, '0')}<size=14>.{Mathf.FloorToInt(timeLeft % 1 * 100)}</size>";
 
 		// Update lesson progress
-		lessonProgress += currentLearningRate * Time.deltaTime;
+		LessonProgress += currentLearningRate * Time.deltaTime;
 
 		// Update lesson progress bar display
-		lessonProgressTMP.text = $"{Mathf.RoundToInt(lessonProgress)}%";
-		progressBarSlider.value = lessonProgress / 100.0f * progressBarMaxValue;
+		lessonProgressTMP.text = $"{Mathf.RoundToInt(LessonProgress)}%";
+		progressBarSlider.value = LessonProgress / 100.0f * progressBarMaxValue;
 	}
 
 	#endregion
@@ -110,7 +129,7 @@ public class Level : MonoBehaviour
 		// Set level variables
 		timeLeft = startTimeLimit;
 		levelNameTMP.text = levelName;
-		lessonProgress = 0;
+		LessonProgress = 0;
 
 		// Annihilate all previous students if any
 		foreach(Student student in studentList)
@@ -126,14 +145,17 @@ public class Level : MonoBehaviour
 		spawnOrder.Shuffle();
 		for (int i = 0; i < numStudents; i++)
 		{
+			Student studentPrefab = studentPrefabs[Mathf.FloorToInt(Random.Range(0, studentPrefabs.Count))];
 			Student student = Instantiate(
 				studentPrefab,
 				studentSpawnLocations[spawnOrder[i]].transform.position,
 				Quaternion.identity,
 				transform);
 			// Attach listener to the student object
+			student.sleepChancePerSecond = studentSleepChancePerSecond;
 			student.OnSleepChangeEvent.AddListener(OnStudentStateChange);
 			student.OnHitEvent.AddListener(OnStudentHit);
+			student.OnWantToSleepEvent.AddListener(OnStudentWantSleep);
 			studentList.Add(student);
 		}
 
@@ -158,13 +180,19 @@ public class Level : MonoBehaviour
 		if (student.IsSleeping)
 		{
 			// Add Points
-			lessonProgress += bonkScore;
+			LessonProgress += bonkScore;
 		}
 		else
 		{
 			// Penalty
-			lessonProgress -= bonkPenalty;
+			LessonProgress -= bonkPenalty;
 		}
+	}
+
+	void OnStudentWantSleep(Student student)
+	{
+		if (numSleepingStudents < maxSleepingStudents)
+			student.IsSleeping = true;
 	}
 
 	#endregion

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TeacherBonk
+  m_Name: Student1SleepAnim
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1941641899, guid: 8e222463d601d4c809212f3924343d6b, type: 3}
+      value: {fileID: 632811925, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
     - time: 0.16666667
-      value: {fileID: 37106215, guid: 8e222463d601d4c809212f3924343d6b, type: 3}
+      value: {fileID: -290389996, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
     - time: 0.33333334
-      value: {fileID: 37106215, guid: 8e222463d601d4c809212f3924343d6b, type: 3}
+      value: {fileID: 40004877, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
+    - time: 0.5
+      value: {fileID: 29433851, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,15 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1941641899, guid: 8e222463d601d4c809212f3924343d6b, type: 3}
-    - {fileID: 37106215, guid: 8e222463d601d4c809212f3924343d6b, type: 3}
-    - {fileID: 37106215, guid: 8e222463d601d4c809212f3924343d6b, type: 3}
+    - {fileID: 632811925, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
+    - {fileID: -290389996, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
+    - {fileID: 40004877, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
+    - {fileID: 29433851, guid: 758639b4a0b9f9e4f9e1385b8199ab65, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
