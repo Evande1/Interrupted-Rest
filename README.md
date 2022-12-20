@@ -23,7 +23,6 @@ Interrupted sleep is a 2D local cooperative game where players revitalise studen
 ## Player Rules and Objectives
 You and your friend will play as teachers whose students are falling asleep in a lecture theatre and you must help wake up your students.
 Player 1 Controls  
-<br>
 W Key: Up 
 <br>
 S Key: Down 
@@ -33,6 +32,7 @@ A Key: Left
 D Key: Right 
 <br>
 C Key: Hit 
+<br>
 <br>
 Player 2 Controls 
 <br>
