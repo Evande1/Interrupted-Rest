@@ -13,7 +13,7 @@
 </details>
 
 ## Project Description
-Interrupted sleep is a 2D local cooperative game where players revitalise students and impart the spirit of lifelong learning by staying awake in lectures.
+Interrupted-Rest is a 2D local cooperative game where players revitalise students and impart the spirit of lifelong learning by staying awake in lectures.
 
 ## Getting Started
 ### Prerequisites
